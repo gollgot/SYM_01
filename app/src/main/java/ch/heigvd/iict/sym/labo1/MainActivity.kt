@@ -1,10 +1,13 @@
 package ch.heigvd.iict.sym.labo1
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,9 +15,9 @@ class MainActivity : AppCompatActivity() {
     // ceci est fait juste pour simplifier ce premier laboratoire,
     // mais il est évident que de hardcoder ceux-ci est une pratique à éviter à tout prix...
     private val credentials = listOf(
-                                Pair("user1@heig-vd.ch","1234"),
-                                Pair("user2@heig-vd.ch","abcd")
-                            )
+        Pair("user1@heig-vd.ch", "1234"),
+        Pair("user2@heig-vd.ch", "abcd")
+    )
 
     // le modifieur lateinit permet de définir des variables avec un type non-null
     // sans pour autant les initialiser immédiatement
@@ -60,22 +63,47 @@ class MainActivity : AppCompatActivity() {
             val emailInput = email.text?.toString()
             val passwordInput = password.text?.toString()
 
-            if(emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
+            if (emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
                 // on affiche un message dans les logs de l'application
                 Log.d(TAG, "Au moins un des deux champs est vide")
                 // on affiche un message d'erreur sur les champs qui n'ont pas été renseignés
                 // la méthode getString permet de charger un String depuis les ressources de
                 // l'application à partir de son id
-                if(emailInput.isNullOrEmpty())
+                if (emailInput.isNullOrEmpty())
                     email.error = getString(R.string.main_mandatory_field)
-                if(passwordInput.isNullOrEmpty())
+                if (passwordInput.isNullOrEmpty())
                     password.error = getString(R.string.main_mandatory_field)
                 // Pour les fonctions lambda, on doit préciser à quelle fonction l'appel à return
                 // doit être appliqué
                 return@setOnClickListener
-            }
+            } else if ('@' !in emailInput!!) {
 
-            //TODO à compléter...
+                Log.d(TAG, "Le mail n'est pas valid")
+                val toast = Toast.makeText(
+                    applicationContext,
+                    getString(R.string.main_invalid_email),
+                    Toast.LENGTH_SHORT
+                )
+                toast.show()
+            } else {
+                if (credentials.contains(Pair(emailInput, passwordInput))) {
+                    Log.d(TAG, "Utilisateur reconnu")
+                } else {
+                    Log.d(TAG, "Utilisteur inconnu")
+
+                    // Construction du dialog
+                    val builder = AlertDialog.Builder(this)
+
+                    builder.setTitle(getString(R.string.main_error))
+                    builder.setMessage(getString(R.string.main_invalid_email_password))
+                    builder.setPositiveButton(
+                        "OK"
+                    ) { dialog, _ -> dialog.dismiss() }
+                    builder.show()
+
+
+                }
+            }
         }
     }
 
