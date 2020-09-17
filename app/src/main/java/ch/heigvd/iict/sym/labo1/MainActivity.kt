@@ -1,6 +1,6 @@
 package ch.heigvd.iict.sym.labo1
 
-import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+
+const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         Pair("user1@heig-vd.ch", "1234"),
         Pair("user2@heig-vd.ch", "abcd")
     )
+
 
     // le modifieur lateinit permet de définir des variables avec un type non-null
     // sans pour autant les initialiser immédiatement
@@ -87,7 +90,12 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             } else {
                 if (credentials.contains(Pair(emailInput, passwordInput))) {
+                    // ouvre une nouvelle activité si l'utilisatuer est reconnu
                     Log.d(TAG, "Utilisateur reconnu")
+                    val intent = Intent(this, SuccessActivity::class.java).apply {
+                        putExtra(EXTRA_EMAIL, emailInput)
+                    }
+                    startActivity(intent)
                 } else {
                     Log.d(TAG, "Utilisteur inconnu")
 
