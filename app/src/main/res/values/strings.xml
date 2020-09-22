@@ -12,5 +12,6 @@
     <string name="main_invalid_email_password">Email or password invalid</string>
     <string name="main_ok" translatable="false">Ok</string>
     <string name="success_login_success">Login success !</string>
+    <string name="success_connected_image">connected image</string>
 
 </resources>
