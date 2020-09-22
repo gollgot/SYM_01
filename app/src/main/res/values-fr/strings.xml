@@ -11,4 +11,6 @@
     <string name="main_error">Erreur</string>
     <string name="main_invalid_email_password">Email ou mot de passe invalide</string>
     <string name="success_login_success">Connection réusite !</string>
+    <string name="success_connected_image">image de connection</string>
+    <string name="create_new_account">Créer un nouveau compte</string>
 </resources>

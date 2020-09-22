@@ -13,5 +13,6 @@
     <string name="main_ok" translatable="false">Ok</string>
     <string name="success_login_success">Login success !</string>
     <string name="success_connected_image">connected image</string>
+    <string name="create_new_account">Create a new account</string>
 
 </resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/app_horizontal_margin"
+    android:layout_marginTop="@dimen/app_vertical_margin"
+    android:layout_marginEnd="@dimen/app_horizontal_margin"
+    android:layout_marginBottom="@dimen/app_vertical_margin"
+    tools:context=".AddNewAccount">
+
+    <ImageView
+        android:id="@+id/new_account_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/new_account_email_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_email_hint" />
+
+        <EditText
+            android:id="@+id/new_account_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_account_email_title"
+            android:hint="@string/main_email_hint"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/new_account_password_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_account_email"
+            android:layout_marginTop="@dimen/app_vertical_separation"
+            android:text="@string/main_password_hint" />
+
+        <EditText
+            android:id="@+id/new_account_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_account_password_title"
+            android:hint="@string/main_password_hint"
+            android:inputType="textPassword" />
+
+
+        <Button
+            android:id="@+id/main_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/new_account_password"
+            android:layout_centerHorizontal="true"
+            android:text="@string/create_new_account" />
+
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
