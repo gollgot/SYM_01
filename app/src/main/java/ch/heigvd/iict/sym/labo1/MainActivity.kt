@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var cancelButton: Button
     private lateinit var validateButton: Button
+    private lateinit var mainActivityNewAccountTextView : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // l'appel à la méthode onCreate de la super classe est obligatoire
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         password = findViewById(R.id.main_password)
         cancelButton = findViewById(R.id.main_cancel)
         validateButton = findViewById(R.id.main_validate)
+        mainActivityNewAccountTextView = findViewById(R.id.main_new_account)
         // Kotlin, au travers des Android Kotlin Extensions permet d'automatiser encore plus cette
         // étape en créant automatiquement les variables pour tous les éléments graphiques présents
         // dans le layout et disposant d'un id
@@ -112,6 +115,11 @@ class MainActivity : AppCompatActivity() {
 
                 }
             }
+        }
+
+        // Ouvre une activité pour la création de compte
+        mainActivityNewAccountTextView.setOnClickListener(){
+            startActivity(Intent(this, AddNewAccount::class.java))
         }
     }
 
