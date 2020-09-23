@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SymTheme">
-        <activity android:name=".AddNewAccount"></activity>
+        <activity
+            android:name=".AddNewAccountActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".SuccessActivity" />
         <activity
             android:name=".MainActivity"
