@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         // on définit le layout à utiliser pour l'affichage
         setContentView(R.layout.activity_main)
 
+        Log.d(TAG, "State onCreate")
+
         // on va maintenant lier le code avec les éléments graphiques (champs texts, boutons, etc.)
         // présents dans le layout (nous allons utiliser l'id défini dans le layout, le cast est
         // réalisé automatiquement)
@@ -126,6 +128,37 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "State onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "State onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "State onPause")
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "State onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "State onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "State onRestart")
+    }
+
     // En Kotlin, les variables static ne sont pas tout à fait comme en Java
     // pour des raison de lisibilité du code, les variables et méthodes static
     // d'une classe doivent être regroupées dans un bloc à part: le companion object
@@ -134,7 +167,7 @@ class MainActivity : AppCompatActivity() {
     // avec les autres éléments non-static de la classe
     companion object {
         private const val TAG: String = "MainActivity"
-        public const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
+        const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
     }
 
 }
