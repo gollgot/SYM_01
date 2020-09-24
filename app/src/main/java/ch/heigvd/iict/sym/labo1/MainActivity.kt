@@ -1,5 +1,6 @@
 package ch.heigvd.iict.sym.labo1
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 
 const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
@@ -17,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     // on définit une liste de couples e-mail / mot de passe
     // ceci est fait juste pour simplifier ce premier laboratoire,
     // mais il est évident que de hardcoder ceux-ci est une pratique à éviter à tout prix...
-    private val credentials = listOf(
+    private val credentials = mutableListOf(
         Pair("user1@heig-vd.ch", "1234"),
         Pair("user2@heig-vd.ch", "abcd")
     )
@@ -29,7 +32,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var cancelButton: Button
     private lateinit var validateButton: Button
-    private lateinit var mainActivityNewAccountTextView : TextView
+    private lateinit var mainActivityNewAccountTextView: TextView
+
+
+    /**
+     * Callback : récupère les informations de l'utilisateur et l'ajouter à la liste
+     */
+    private val getCredentials =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            // Si le résultat est un succès
+            if (result.resultCode == Activity.RESULT_OK) {
+                Log.d(TAG, "data receive \n email : $email, password : $password")
+                val email = result.data?.getStringExtra("email").toString()
+                val password = result.data?.getStringExtra("password").toString()
+                credentials.add(Pair(email, password))
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // l'appel à la méthode onCreate de la super classe est obligatoire
@@ -117,9 +135,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Ouvre une activité pour la création de compte
-        mainActivityNewAccountTextView.setOnClickListener(){
-            startActivity(Intent(this, AddNewAccount::class.java))
+        // Ouvre une activité pour la création de compte et attends une réponse de la nouvelle activité
+        mainActivityNewAccountTextView.setOnClickListener() {
+            getCredentials.launch(Intent(this, AddNewAccountActivity::class.java))
         }
     }
 
