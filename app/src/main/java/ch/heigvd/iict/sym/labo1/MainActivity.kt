@@ -86,20 +86,18 @@ class MainActivity : AppCompatActivity() {
 
             // Credential verification
             if(!this.credentials.contains(Pair(emailInput,passwordInput))){
-                val alertDialog: AlertDialog? = this.let {
-                    val builder = AlertDialog.Builder(it)
-                    builder.apply {
-                        setPositiveButton(getString(R.string.main_dialog_close),
-                            DialogInterface.OnClickListener { dialog, id ->
-                                // User clicked OK button
-                            })
-                    }
-                    builder.setTitle(getString(R.string.main_dialog_credentials_title))
-                    builder.setMessage(getString(R.string.main_dialog_credentials_message))
-                    // Create the AlertDialog
-                    builder.create()
+                val builder = AlertDialog.Builder(this)
+                builder.apply {
+                    setPositiveButton(getString(R.string.main_dialog_close),
+                        DialogInterface.OnClickListener { dialog, id ->
+                            // User clicked OK button
+                        })
                 }
-                alertDialog?.show();
+                builder.setTitle(getString(R.string.main_dialog_credentials_title))
+                builder.setMessage(getString(R.string.main_dialog_credentials_message))
+                // Create the AlertDialog
+                builder.create()
+                builder.show()
                 return@setOnClickListener
             }
         }
