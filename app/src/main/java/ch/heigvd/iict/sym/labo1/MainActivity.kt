@@ -1,11 +1,16 @@
 package ch.heigvd.iict.sym.labo1
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import kotlinx.coroutines.NonCancellable.cancel
 
 class MainActivity : AppCompatActivity() {
 
@@ -83,6 +88,26 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.main_email_error_msg, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+
+            if(!credentials.contains(Pair(emailInput, passwordInput))) {
+                // Credentials invalides
+                val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.apply {
+                        setPositiveButton("OK",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User clicked OK button
+                            })
+                    }
+
+                    // Create the AlertDialog
+                    builder.setMessage(R.string.main_credentials_error_msg)
+                    builder.setTitle(R.string.main_credentials_error_title)
+                    builder.create()
+                }
+                alertDialog?.show()
+            }
+
         }
     }
 
