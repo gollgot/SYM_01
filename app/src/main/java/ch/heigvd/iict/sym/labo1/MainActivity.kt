@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import ch.heigvd.iict.sym.labo1.account.InputChecker
 
 const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
 
@@ -87,29 +88,16 @@ class MainActivity : AppCompatActivity() {
             val emailInput = email.text?.toString()
             val passwordInput = password.text?.toString()
 
-            if (emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
-                // on affiche un message dans les logs de l'application
-                Log.d(TAG, "Au moins un des deux champs est vide")
-                // on affiche un message d'erreur sur les champs qui n'ont pas été renseignés
-                // la méthode getString permet de charger un String depuis les ressources de
-                // l'application à partir de son id
-                if (emailInput.isNullOrEmpty())
-                    email.error = getString(R.string.main_mandatory_field)
-                if (passwordInput.isNullOrEmpty())
-                    password.error = getString(R.string.main_mandatory_field)
-                // Pour les fonctions lambda, on doit préciser à quelle fonction l'appel à return
-                // doit être appliqué
-                return@setOnClickListener
-            } else if ('@' !in emailInput!!) {
-
-                Log.d(TAG, "Le mail n'est pas valid")
-                val toast = Toast.makeText(
-                    applicationContext,
-                    getString(R.string.main_invalid_email),
-                    Toast.LENGTH_SHORT
+            // Si l'input est correct
+            if (InputChecker.input(
+                    emailInput,
+                    passwordInput,
+                    email,
+                    password,
+                    this,
+                    applicationContext
                 )
-                toast.show()
-            } else {
+            ) {
                 if (credentials.contains(Pair(emailInput, passwordInput))) {
                     // ouvre une nouvelle activité si l'utilisatuer est reconnu
                     Log.d(TAG, "Utilisateur reconnu")
@@ -129,7 +117,6 @@ class MainActivity : AppCompatActivity() {
                         "OK"
                     ) { dialog, _ -> dialog.dismiss() }
                     builder.show()
-
 
                 }
             }
