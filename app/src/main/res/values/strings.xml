@@ -7,5 +7,6 @@
     <string name="main_validate_btn">Validate</string>
     <string name="main_cancel_btn">Cancel</string>
     <string name="main_create_account">New account</string>
+    <string name="main_email_error_msg">Invalid email address</string>
 
 </resources>
