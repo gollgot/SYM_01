@@ -1,14 +1,12 @@
 package ch.heigvd.iict.sym.labo1
 
 import android.app.Activity
-import android.app.ActivityManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import ch.heigvd.iict.sym.labo1.account.InputChecker
 
 class AddNewAccountActivity : AppCompatActivity() {

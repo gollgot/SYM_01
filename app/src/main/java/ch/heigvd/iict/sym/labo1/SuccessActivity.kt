@@ -18,7 +18,7 @@ class SuccessActivity : AppCompatActivity() {
 
         // Récupère le mail de l'activité appelant et l'affiche sur l'écran
         successActivityUserEmailTextView = findViewById<TextView>(R.id.success_user_email).apply {
-            text = intent.getStringExtra(EXTRA_EMAIL)
+            text = intent.getStringExtra(MainActivity.EXTRA_EMAIL)
         }
 
         // Récupère l'image depuis le lien et l'afficher sur l'activité

@@ -8,13 +8,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import ch.heigvd.iict.sym.labo1.account.InputChecker
 
-const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
 
 class MainActivity : AppCompatActivity() {
 
@@ -136,6 +134,7 @@ class MainActivity : AppCompatActivity() {
     // avec les autres éléments non-static de la classe
     companion object {
         private const val TAG: String = "MainActivity"
+        public const val EXTRA_EMAIL = "ch.heigvd.iict.sym.labo1.EMAIL"
     }
 
 }
