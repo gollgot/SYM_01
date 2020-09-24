@@ -7,4 +7,8 @@
     <string name="main_validate_btn">Validé</string>
     <string name="main_cancel_btn">Annulé</string>
     <string name="main_create_account">Nouveau compte</string>
+    <string name="main_error_invalid_email">Email invalide</string>
+    <string name="main_dialog_close">Fermer</string>
+    <string name="main_dialog_credentials_title">Echec d\'authentification</string>
+    <string name="main_dialog_credentials_message">Email ou mot de passe invalide</string>
 </resources>

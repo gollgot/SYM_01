@@ -8,5 +8,8 @@
     <string name="main_cancel_btn">Cancel</string>
     <string name="main_create_account">New account</string>
     <string name="main_error_invalid_email">Invalid email</string>
+    <string name="main_dialog_close">Close</string>
+    <string name="main_dialog_credentials_title">Invalid credentials</string>
+    <string name="main_dialog_credentials_message">Invalid email or password</string>
 
 </resources>
