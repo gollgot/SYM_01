@@ -2,6 +2,7 @@ package ch.heigvd.iict.sym.labo1
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -100,6 +101,10 @@ class MainActivity : AppCompatActivity() {
                 builder.show()
                 return@setOnClickListener
             }
+
+            // All corrects -> go to ProfileActivity
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
