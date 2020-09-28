@@ -19,6 +19,8 @@ class AddNewAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_new_account)
 
+        Log.d(TAG, "State onCreate")
+
         newAccountActivityEmailEditText = findViewById(R.id.new_account_email)
         newAccountActivityPasswordEditText = findViewById(R.id.new_account_password)
         newAccountActivitySubmitButton = findViewById(R.id.new_account_submit)
@@ -60,6 +62,38 @@ class AddNewAccountActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "State onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "State onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "State onPause")
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "State onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "State onDestroy")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "State onRestart")
     }
 
     companion object {
