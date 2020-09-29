@@ -10,5 +10,6 @@
     <string name="main_email_error_msg">Invalid email address</string>
     <string name="main_credentials_error_msg">Invalid credentials</string>
     <string name="main_credentials_error_title">Error</string>
+    <string name="create_a_new_account">Create a new account</string>
 
 </resources>

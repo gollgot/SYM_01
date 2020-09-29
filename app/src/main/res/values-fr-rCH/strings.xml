@@ -10,4 +10,5 @@
     <string name="main_email_error_msg">Adresse email invalide</string>
     <string name="main_credentials_error_msg">Identifiants incorrects</string>
     <string name="main_credentials_error_title">Erreur</string>
+    <string name="create_a_new_account">Créer un nouveau compte</string>
 </resources>

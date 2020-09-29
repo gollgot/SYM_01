@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import kotlinx.coroutines.NonCancellable.cancel
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var cancelButton: Button
     private lateinit var validateButton: Button
+    private lateinit var newAccountTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // l'appel à la méthode onCreate de la super classe est obligatoire
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         password = findViewById(R.id.main_password)
         cancelButton = findViewById(R.id.main_cancel)
         validateButton = findViewById(R.id.main_validate)
+        newAccountTextView = findViewById(R.id.main_new_account)
         // Kotlin, au travers des Android Kotlin Extensions permet d'automatiser encore plus cette
         // étape en créant automatiquement les variables pour tous les éléments graphiques présents
         // dans le layout et disposant d'un id
@@ -112,7 +115,12 @@ class MainActivity : AppCompatActivity() {
 
             // Tout ok, passer à l'autre activity
             val intent = Intent(this, HomeActivity::class.java)
-            intent.putExtra("email", emailInput);
+            intent.putExtra("email", emailInput)
+            startActivity(intent)
+        }
+
+        newAccountTextView.setOnClickListener {
+            val intent = Intent(this, NewAccountActivity::class.java)
             startActivity(intent)
         }
     }
