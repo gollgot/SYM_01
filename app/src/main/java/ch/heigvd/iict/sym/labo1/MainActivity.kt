@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
 
             // Tout ok, passer à l'autre activity
             val intent = Intent(this, HomeActivity::class.java)
+            intent.putExtra("email", emailInput);
             startActivity(intent)
         }
     }
