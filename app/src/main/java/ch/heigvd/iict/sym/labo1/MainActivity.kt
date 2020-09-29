@@ -1,7 +1,6 @@
 package ch.heigvd.iict.sym.labo1
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +10,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import kotlinx.coroutines.NonCancellable.cancel
 
 class MainActivity : AppCompatActivity() {
 
