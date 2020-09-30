@@ -11,4 +11,7 @@
     <string name="main_dialog_close">Fermer</string>
     <string name="main_dialog_credentials_title">Echec d\'authentification</string>
     <string name="main_dialog_credentials_message">Email ou mot de passe invalide</string>
+    <string name="register_register_title">S\'enregister</string>
+    <string name="register_validate">Valider</string>
+    <string name="main_register_successful">a bien été créé</string>
 </resources>

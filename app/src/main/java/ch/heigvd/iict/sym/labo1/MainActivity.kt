@@ -1,13 +1,16 @@
 package ch.heigvd.iict.sym.labo1
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     // on définit une liste de couples e-mail / mot de passe
     // ceci est fait juste pour simplifier ce premier laboratoire,
     // mais il est évident que de hardcoder ceux-ci est une pratique à éviter à tout prix...
-    private val credentials = listOf(
+    private val credentials = mutableListOf(
                                 Pair("user1@heig-vd.ch","1234"),
                                 Pair("user2@heig-vd.ch","abcd")
                             )
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var password: EditText
     private lateinit var cancelButton: Button
     private lateinit var validateButton: Button
+    private lateinit var tvRegister: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // l'appel à la méthode onCreate de la super classe est obligatoire
@@ -40,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         password = findViewById(R.id.main_password)
         cancelButton = findViewById(R.id.main_cancel)
         validateButton = findViewById(R.id.main_validate)
+        tvRegister = findViewById(R.id.main_new_account)
         // Kotlin, au travers des Android Kotlin Extensions permet d'automatiser encore plus cette
         // étape en créant automatiquement les variables pour tous les éléments graphiques présents
         // dans le layout et disposant d'un id
@@ -107,6 +112,27 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("email", emailInput)
             startActivity(intent)
         }
+
+        tvRegister.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivityForResult(intent, LAUNCH_REGISTER_ACTIVITY)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // On revient de l'activity "Register"
+        if(requestCode == LAUNCH_REGISTER_ACTIVITY) {
+            // Resultat OK
+            if(resultCode == Activity.RESULT_OK) {
+                val email: String = data?.getStringExtra("email").toString()
+                val password: String = data?.getStringExtra("password").toString()
+                credentials.add(Pair(email, password))
+
+                Toast.makeText(this, email + " " + getString(R.string.main_register_successful), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     // En Kotlin, les variables static ne sont pas tout à fait comme en Java
@@ -117,6 +143,7 @@ class MainActivity : AppCompatActivity() {
     // avec les autres éléments non-static de la classe
     companion object {
         private const val TAG: String = "MainActivity"
+        private const val LAUNCH_REGISTER_ACTIVITY: Int = 1
     }
 
 }
