@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
 
             // All corrects -> go to ProfileActivity
             val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("email", emailInput)
             startActivity(intent)
         }
     }
