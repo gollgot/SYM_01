@@ -2,18 +2,16 @@ package ch.heigvd.iict.sym.labo1
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Instrumentation
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import ch.heigvd.iict.sym.labo1.AccountUtils.Companion.ResetInputs
 
 class MainActivity : AppCompatActivity() {
 
@@ -65,12 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         //mise en place des événements
         cancelButton.setOnClickListener {
-            //on va vider les champs de la page de login lors du clique sur le bouton Cancel
-            email.text?.clear()
-            password.text?.clear()
-            // on annule les éventuels messages d'erreur présents sur les champs de saisie
-            email.error = null
-            password.error = null
+            ResetInputs(email, password)
         }
 
         validateButton.setOnClickListener {
@@ -82,29 +75,11 @@ class MainActivity : AppCompatActivity() {
             val emailInput = email.text?.toString()
             val passwordInput = password.text?.toString()
 
-            if(emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
-                // on affiche un message dans les logs de l'application
-                Log.d(TAG, "Au moins un des deux champs est vide")
-                // on affiche un message d'erreur sur les champs qui n'ont pas été renseignés
-                // la méthode getString permet de charger un String depuis les ressources de
-                // l'application à partir de son id
-                if(emailInput.isNullOrEmpty())
-                    email.error = getString(R.string.main_mandatory_field)
-                if(passwordInput.isNullOrEmpty())
-                    password.error = getString(R.string.main_mandatory_field)
-                // Pour les fonctions lambda, on doit préciser à quelle fonction l'appel à return
-                // doit être appliqué
+            // Input check
+            if(!AccountUtils.CredentialsInputsCheck(email, password, this))
                 return@setOnClickListener
-            }
 
-            //TODO à compléter...
-
-            if(!emailInput!!.contains('@')) {
-                // Adresse email invalide
-                Toast.makeText(this, R.string.main_email_error_msg, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
+            // Verify credentials validity
             if(!credentials.contains(Pair(emailInput, passwordInput))) {
                 // Credentials invalides
                 val alertDialog: AlertDialog? = this.let {
