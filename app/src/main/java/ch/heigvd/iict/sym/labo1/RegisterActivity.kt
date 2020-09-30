@@ -4,10 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import ch.heigvd.iict.sym.labo1.validator.AccountValidator
 
 private lateinit var etEmail: EditText
 private lateinit var etPassword: EditText
@@ -24,37 +23,15 @@ class RegisterActivity : AppCompatActivity() {
 
         // Clique sur le bouton de validation
         btnValidate.setOnClickListener{
-            //on réinitialise les messages d'erreur
-            etEmail.error = null
-            etPassword.error = null
-
-            //on récupère le contenu de deux champs dans des variables de type String
-            val emailInput = etEmail.text?.toString()
-            val passwordInput = etPassword.text?.toString()
-
-            // Email ou mot de passe vide
-            if(emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
-                Log.d(TAG, "Au moins un des deux champs est vide")
-                if(emailInput.isNullOrEmpty())
-                    etEmail.error = getString(R.string.main_mandatory_field)
-                if(passwordInput.isNullOrEmpty())
-                    etPassword.error = getString(R.string.main_mandatory_field)
-
-                return@setOnClickListener
+            val accountValidator = AccountValidator(this, etEmail, etPassword)
+            // Account correct -> return to mainActivity and pass as result the email / password
+            if(accountValidator.isValid()){
+                val intent = Intent()
+                intent.putExtra("email", etEmail.text.toString())
+                intent.putExtra("password", etPassword.text.toString())
+                setResult(Activity.RESULT_OK, intent)
+                finish()
             }
-
-            // Email verification
-            if(!emailInput!!.contains("@")){
-                etEmail.error = getString(R.string.main_error_invalid_email)
-                return@setOnClickListener
-            }
-
-            // All correct -> return to mainActivity and pass as result the email / password
-            val intent = Intent()
-            intent.putExtra("email", emailInput)
-            intent.putExtra("password", passwordInput)
-            setResult(Activity.RESULT_OK, intent)
-            finish()
         }
 
     }

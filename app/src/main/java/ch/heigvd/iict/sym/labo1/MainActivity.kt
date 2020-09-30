@@ -6,12 +6,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import ch.heigvd.iict.sym.labo1.validator.AccountValidator
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,10 +24,10 @@ class MainActivity : AppCompatActivity() {
 
     // le modifieur lateinit permet de définir des variables avec un type non-null
     // sans pour autant les initialiser immédiatement
-    private lateinit var email: EditText
-    private lateinit var password: EditText
-    private lateinit var cancelButton: Button
-    private lateinit var validateButton: Button
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnCancel: Button
+    private lateinit var btnValidate: Button
     private lateinit var tvRegister: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +39,10 @@ class MainActivity : AppCompatActivity() {
         // on va maintenant lier le code avec les éléments graphiques (champs texts, boutons, etc.)
         // présents dans le layout (nous allons utiliser l'id défini dans le layout, le cast est
         // réalisé automatiquement)
-        email = findViewById(R.id.main_email)
-        password = findViewById(R.id.main_password)
-        cancelButton = findViewById(R.id.main_cancel)
-        validateButton = findViewById(R.id.main_validate)
+        etEmail = findViewById(R.id.main_email)
+        etPassword = findViewById(R.id.main_password)
+        btnCancel = findViewById(R.id.main_cancel)
+        btnValidate = findViewById(R.id.main_validate)
         tvRegister = findViewById(R.id.main_new_account)
         // Kotlin, au travers des Android Kotlin Extensions permet d'automatiser encore plus cette
         // étape en créant automatiquement les variables pour tous les éléments graphiques présents
@@ -51,68 +50,46 @@ class MainActivity : AppCompatActivity() {
         // cf. https://medium.com/@temidjoy/findviewbyid-vs-android-kotlin-extensions-7db3c6cc1d0a
 
         //mise en place des événements
-        cancelButton.setOnClickListener {
+        btnCancel.setOnClickListener {
             //on va vider les champs de la page de login lors du clique sur le bouton Cancel
-            email.text?.clear()
-            password.text?.clear()
+            etEmail.text?.clear()
+            etPassword.text?.clear()
             // on annule les éventuels messages d'erreur présents sur les champs de saisie
-            email.error = null
-            password.error = null
+            etEmail.error = null
+            etPassword.error = null
         }
 
-        validateButton.setOnClickListener {
-            //on réinitialise les messages d'erreur
-            email.error = null
-            password.error = null
+        // Click on validate button
+        btnValidate.setOnClickListener {
+            val accountValidator = AccountValidator(this, etEmail, etPassword)
 
-            //on récupère le contenu de deux champs dans des variables de type String
-            val emailInput = email.text?.toString()
-            val passwordInput = password.text?.toString()
+            if(accountValidator.isValid()){
+                // Credential verification
+                if(!this.credentials.contains(Pair(etEmail.text.toString(),etPassword.text.toString()))){
+                    val builder = AlertDialog.Builder(this)
+                    builder.apply {
+                        setPositiveButton(getString(R.string.main_dialog_close),
+                            DialogInterface.OnClickListener { dialog, id ->
+                                // User clicked OK button
+                            })
+                    }
+                    builder.setTitle(getString(R.string.main_dialog_credentials_title))
+                    builder.setMessage(getString(R.string.main_dialog_credentials_message))
+                    // Create the AlertDialog
+                    builder.create()
+                    builder.show()
 
-            if(emailInput.isNullOrEmpty() or passwordInput.isNullOrEmpty()) {
-                // on affiche un message dans les logs de l'application
-                Log.d(TAG, "Au moins un des deux champs est vide")
-                // on affiche un message d'erreur sur les champs qui n'ont pas été renseignés
-                // la méthode getString permet de charger un String depuis les ressources de
-                // l'application à partir de son id
-                if(emailInput.isNullOrEmpty())
-                    email.error = getString(R.string.main_mandatory_field)
-                if(passwordInput.isNullOrEmpty())
-                    password.error = getString(R.string.main_mandatory_field)
-                // Pour les fonctions lambda, on doit préciser à quelle fonction l'appel à return
-                // doit être appliqué
-                return@setOnClickListener
-            }
-
-            // Email verification
-            if(!emailInput!!.contains("@")){
-                Toast.makeText(this, getString(R.string.main_error_invalid_email), Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            // Credential verification
-            if(!this.credentials.contains(Pair(emailInput,passwordInput))){
-                val builder = AlertDialog.Builder(this)
-                builder.apply {
-                    setPositiveButton(getString(R.string.main_dialog_close),
-                        DialogInterface.OnClickListener { dialog, id ->
-                            // User clicked OK button
-                        })
+                    return@setOnClickListener
                 }
-                builder.setTitle(getString(R.string.main_dialog_credentials_title))
-                builder.setMessage(getString(R.string.main_dialog_credentials_message))
-                // Create the AlertDialog
-                builder.create()
-                builder.show()
-                return@setOnClickListener
-            }
 
-            // All corrects -> go to ProfileActivity
-            val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("email", emailInput)
-            startActivity(intent)
+                // All corrects -> go to ProfileActivity
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.putExtra("email", etEmail.text.toString())
+                startActivity(intent)
+            }
         }
 
+        // Click on register text view
         tvRegister.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
             startActivityForResult(intent, LAUNCH_REGISTER_ACTIVITY)
