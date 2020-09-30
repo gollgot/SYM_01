@@ -1,5 +1,6 @@
 package ch.heigvd.iict.sym.labo1
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -68,7 +69,9 @@ class NewAccountActivity : AppCompatActivity() {
 
             // Tout ok, passer les infos de compte à l'autre activity
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("user", Pair(emailInput, passwordInput))
+            intent.putExtra("email", emailInput)
+            intent.putExtra("password", passwordInput)
+            setResult(Activity.RESULT_OK, intent)
 
             finish()
         }
