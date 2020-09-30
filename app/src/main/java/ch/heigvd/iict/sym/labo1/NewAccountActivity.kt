@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 
@@ -15,6 +16,8 @@ class NewAccountActivity : AppCompatActivity() {
     private lateinit var validateButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, AccountUtils.LOG_CREATE)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_account)
 
@@ -47,6 +50,36 @@ class NewAccountActivity : AppCompatActivity() {
 
             finish()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, AccountUtils.LOG_START)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, AccountUtils.LOG_STOP)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, AccountUtils.LOG_PAUSE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, AccountUtils.LOG_RESUME)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, AccountUtils.LOG_RESTART)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, AccountUtils.LOG_DESTROY)
     }
 
     companion object {

@@ -1,18 +1,22 @@
 package ch.heigvd.iict.sym.labo1
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 
 import android.content.Context
 import android.widget.EditText
-import ch.heigvd.iict.sym.labo1.R
 
 class AccountUtils {
     companion object {
         private const val TAG: String = "AccountUtils"
+        const val LOG_CREATE = "Activity created"
+        const val LOG_START = "Activity starts"
+        const val LOG_STOP = "Activity stops"
+        const val LOG_PAUSE = "Activity pauses"
+        const val LOG_RESUME = "Activity resumes"
+        const val LOG_RESTART = "Activity restarts"
+        const val LOG_DESTROY = "Activity destroyed"
 
         fun CredentialsInputsCheck(
             email: TextView,

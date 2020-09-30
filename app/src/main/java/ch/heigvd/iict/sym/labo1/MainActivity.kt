@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(TAG, AccountUtils.LOG_CREATE)
+
         // l'appel à la méthode onCreate de la super classe est obligatoire
         super.onCreate(savedInstanceState)
         // on définit le layout à utiliser pour l'affichage
@@ -110,6 +113,36 @@ class MainActivity : AppCompatActivity() {
         newAccountTextView.setOnClickListener() {
             getCredentials.launch(Intent(this, NewAccountActivity::class.java))
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, AccountUtils.LOG_START)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, AccountUtils.LOG_STOP)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, AccountUtils.LOG_PAUSE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, AccountUtils.LOG_RESUME)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, AccountUtils.LOG_RESTART)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, AccountUtils.LOG_DESTROY)
     }
 
     // En Kotlin, les variables static ne sont pas tout à fait comme en Java
