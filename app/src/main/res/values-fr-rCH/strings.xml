@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SYM - Labo 1</string>
+    <string name="main_email_hint">Votre adresse E-mail</string>
+    <string name="main_password_hint">Votre mot de passe</string>
+    <string name="main_mandatory_field">Les champs requis ne peuvent pas êter laissés vides</string>
+    <string name="main_validate_btn">Validé</string>
+    <string name="main_cancel_btn">Annulé</string>
+    <string name="main_create_account">Nouveau compte</string>
+    <string name="main_error_invalid_email">Email invalide</string>
+    <string name="main_dialog_close">Fermer</string>
+    <string name="main_dialog_credentials_title">Echec d\'authentification</string>
+    <string name="main_dialog_credentials_message">Email ou mot de passe invalide</string>
+    <string name="register_register_title">S\'enregister</string>
+    <string name="register_validate">Valider</string>
+    <string name="main_register_successful">a bien été créé</string>
+</resources>

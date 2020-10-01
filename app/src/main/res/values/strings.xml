@@ -7,5 +7,12 @@
     <string name="main_validate_btn">Validate</string>
     <string name="main_cancel_btn">Cancel</string>
     <string name="main_create_account">New account</string>
+    <string name="main_error_invalid_email">Invalid email</string>
+    <string name="main_dialog_close">Close</string>
+    <string name="main_dialog_credentials_title">Invalid credentials</string>
+    <string name="main_dialog_credentials_message">Invalid email or password</string>
+    <string name="register_register_title">Register</string>
+    <string name="register_validate">Validate</string>
+    <string name="main_register_successful">successfully created</string>
 
 </resources>
