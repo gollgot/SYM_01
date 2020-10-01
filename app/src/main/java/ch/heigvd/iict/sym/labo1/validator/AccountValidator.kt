@@ -1,3 +1,5 @@
+// Authors: Loïc Dessaules, Robin Demarta, Chau Ying Kot
+
 package ch.heigvd.iict.sym.labo1.validator
 
 import android.content.Context
